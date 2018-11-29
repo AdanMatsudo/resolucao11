@@ -46,7 +46,7 @@ import Lombok.NoArgsConstructor;
 
             public List<Cidade> readCidade(@HttpTrigger(name = "readCidade", methods = (HttpMethod.GET), route ="cidade") String cidade){
 
-                return Stream.of(new Cidade("Torrinha", new Estado("Sao Paulo"))).collect(Collectors.toList());
+                return Stream.of(new Cidade(UUID.randomUUID(), "Torrinha", new Estado(UUID.randomUUID, "Sao Paulo"))).collect(Collectors.toList());
                 
             }
         }
