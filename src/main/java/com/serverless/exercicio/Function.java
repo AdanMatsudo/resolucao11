@@ -12,10 +12,9 @@ import Lombok.NoArgsConstructor;
 
     @Data
     @NoArgsConstructor
-    @AllArgsConstructor
     class Cidade {
 
-    private UUID id;
+    private Long id;
     private String nome;
     private Estado estado;
 
@@ -23,10 +22,9 @@ import Lombok.NoArgsConstructor;
     }
     @Data
     @AllArgsConstructor
-    @NoArgsConstructor
     class Estado {
 
-    private UUID id;
+    private Long id;
     private String nome;
 
 }
@@ -38,7 +36,8 @@ import Lombok.NoArgsConstructor;
 
             public Cidade createCidade(@HttpTrigger(name = "createCidade", methods = {HttpMethod.POST}, route = "cidade") Cidade cidade){
 
-                cidade.setId(UUID.randomUUID());
+                cidade.setId(100L);
+                
                 return cidade;
             }
 
@@ -46,7 +45,10 @@ import Lombok.NoArgsConstructor;
 
             public List<Cidade> readCidade(@HttpTrigger(name = "readCidade", methods = (HttpMethod.GET), route ="cidade") String cidade){
 
-                return Stream.of(new Cidade(UUID.randomUUID(), "Torrinha", new Estado(UUID.randomUUID, "Sao Paulo"))).collect(Collectors.toList());
+                return Stream.of(
+                    new Cidade(1L, "Torrinha", new Estado(1L, "Sao Paulo"))
+                    new Cidade(2L, "Cornelio", new Estado(2L, "Parana"))
+                ).collect(Collectors.toList());
                 
             }
         }
@@ -54,16 +56,14 @@ import Lombok.NoArgsConstructor;
         @FunctionName("edit-cidade"){
 
             public Cidade editCidade(@HttpTrigger(name = "editCidade", methods = { HttpMethod.PUT}, route = "cidade") Cidade cidade){
-
-
-                cidade.setNome(cidade.getNome());
+                
                 return cidade;
             }
         }
 
         @FunctionName("delete-cidade"){
 
-            public String deleteCidade(@HttpTrigger(name = "deleteCidade"), methods = { HttpMethod.DELETE}, route = "cidade/{id}" int id){
+            public int deleteCidade(@HttpTrigger(name = "deleteCidade"), methods = { HttpMethod.DELETE}, route = "cidade/{id}" Long id){
 
                 return 200;
             }
