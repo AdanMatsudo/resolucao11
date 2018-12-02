@@ -7,11 +7,10 @@ import com.microsoft.azure.functions.*;
 
 import Lombok.AllArgsConstructor;
 import Lombok.Data;
-import Lombok.NoArgsConstructor;
 
 
     @Data
-    @NoArgsConstructor
+    @AllArgsConstructor
     class Cidade {
 
     private Long id;
