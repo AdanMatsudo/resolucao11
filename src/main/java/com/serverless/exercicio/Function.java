@@ -28,7 +28,7 @@ import Lombok.Data;
 
 }
 
-    public class DAO{
+    public class Function{
 
 
         @FunctionName("create-cidade"){
